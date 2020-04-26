@@ -19,7 +19,7 @@ function datagenerate(x){
             });
             k += 0.02;
         }        
-        updataselections(2,70,0.001,50,"tanh");
+        updataselections(2,70,0.01,50,"tanh");
 
     }
 
@@ -35,7 +35,7 @@ function datagenerate(x){
         }
 
 
-        updataselections(2,56,0.001,206,"tanh");
+        updataselections(2,100,0.01,206,"tanh");
 
     }
     

@@ -43,12 +43,12 @@ function timedCount() {
     
     let error=fit();
 
-/*    if(preverr>error){
+ if(preverr>error){
         NN.setLearningRate(NN.getLearningRate()*1.05);
     }else{
         NN.setLearningRate(NN.getLearningRate()*0.95);
     }
-*/
+
 
     getPredections();
 
