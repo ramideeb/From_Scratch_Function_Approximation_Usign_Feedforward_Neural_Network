@@ -113,7 +113,7 @@
 				document.getElementById('hid_n').innerHTML=this.value;
 				Number_Of_Hidden_Layers= Number(this.value);
 
-				" type="range" class="custom-range" id="formControlRange" min="1" max="50" value="1" >
+				" type="range" class="custom-range" id="h11" min="1" max="20" value="1" >
 				<p id="hid_n">1</p>
 			  </div>
 
@@ -123,7 +123,7 @@
 				
 				document.getElementById('hid_nn').innerHTML=this.value;
 				Number_Of_Nodes_Per_Layer=Number(this.value);
-				" type="range" class="custom-range"id="formControlRange" min="1" max="300" value="1" >
+				" type="range" class="custom-range" id="h12" min="1" max="300" value="1" >
 				<p id="hid_nn">1</p>
 			  </div>
 			  
@@ -133,7 +133,7 @@
 				<input onchange="
 				Learning_Rate=Number(this.value)
 				document.getElementById('hid_nnlr').innerHTML=this.value;
-				" type="range" class="custom-range" id="formControlRange" min="0.0001" max="1" step="0.0001" value="0.01" >
+				" type="range" class="custom-range" id="h13" min="0.0001" max="1" step="0.0001" value="0.01" >
 				<p id="hid_nnlr">0.01</p>
 			  </div>
 
@@ -144,7 +144,7 @@
 				
 				document.getElementById('hid_nnep').innerHTML=this.value;
 				document.getElementById('epn').innerHTML=this.value
-				" type="range"class="custom-range"id="formControlRange" min="1" max="1000" step="1" value="50" >
+				" type="range"class="custom-range"id="h14" min="1" max="1000" step="1" value="50" >
 				<p id="hid_nnep">50</p>
 			  </div>
 
@@ -152,7 +152,7 @@
 			  
 
 			  <p>Activation Function</p>
-			  <select class="custom-select" onchange="
+			  <select class="custom-select" id="h15" onchange="
 			 Activation_Function=this.value 
 			  ">
 				
@@ -185,10 +185,12 @@
 				backgroundColor: color('rgb(250,0,0)'),
 				data: []
 			}, {
+			
 				label: 'My Second dataset',
 				borderColor: ('rgb(0,0,255)'),
 				backgroundColor: color('rgb(0,0,255)'),
-				data: []
+				data: [],
+				type: 'line'
 			}]
 		};
 
@@ -198,7 +200,6 @@
 				data: scatterChartData,
 				options: {
 					responsive: true,
-				
 				}
 			});
 		};
