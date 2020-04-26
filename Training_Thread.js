@@ -10,7 +10,7 @@ var predections = [];
 function getPredections() {
     predections=[];
     k = 0;
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 400; i++) {
 
         predections.push(
 
@@ -21,7 +21,7 @@ function getPredections() {
 
 
         );
-        k += 0.01;
+        k += 0.0025;
     };
 }
 

@@ -180,15 +180,15 @@
 		var color = Chart.helpers.color;
 		var scatterChartData = {
 			datasets: [{
-				label: 'My First dataset',
-				borderColor: 'rgb(250,0,0)',
-				backgroundColor: color('rgb(250,0,0)'),
+				label: 'training data',
+				borderColor: 'rgb(220,53,69)',
+				backgroundColor: 'rgb(220,53,69)',
 				data: []
 			}, {
 			
-				label: 'My Second dataset',
-				borderColor: ('rgb(0,0,255)'),
-				backgroundColor: color('rgb(0,0,255)'),
+				label: 'testing data',
+				borderColor: ('rgb(40, 167, 69'),
+				backgroundColor:'rgb(40, 167, 69',
 				data: [],
 				type: 'line'
 			}]
@@ -211,7 +211,7 @@
 		document.getElementById('ennnn').innerHTML=0;	
 	  if(typeof(Worker) !== "undefined") {
 		if(typeof(w) == "undefined") {
-		  w = new Worker("demo_workers.js");
+		  w = new Worker("Training_Thread.js");
 		}
 		w.postMessage(
 			
