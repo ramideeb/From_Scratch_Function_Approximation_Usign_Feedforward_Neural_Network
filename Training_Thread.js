@@ -3,6 +3,7 @@ self.importScripts('lib/matrix.js');
 
 let NN;
 let epochs;
+let ALR;
 
 
 
@@ -43,11 +44,13 @@ function timedCount() {
     
     let error=fit();
 
+if(ALR){
  if(preverr>error){
-        NN.setLearningRate(NN.getLearningRate()*1.05);
+        NN.setLearningRate(NN.getLearningRate()*1.1);
     }else{
         NN.setLearningRate(NN.getLearningRate()*0.95);
     }
+}
 
 
     getPredections();
@@ -68,6 +71,7 @@ if(epochs>0)setTimeout("timedCount()",500);
 self.addEventListener("message", function(e) {
     data=e.data.d;
     NN = new NeuralNetwork(1,e.data.NOHL,e.data.NONPL,1);
+    ALR=e.data.ALR;
 
 
     NN.setLearningRate(e.data.LR);

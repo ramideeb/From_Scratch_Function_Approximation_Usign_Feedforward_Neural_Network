@@ -20,6 +20,7 @@ function datagenerate(x){
             k += 0.02;
         }        
         updataselections(2,70,0.01,50,"tanh");
+        document.getElementById('exampleCheck1').checked=true;
 
     }
 
@@ -36,6 +37,7 @@ function datagenerate(x){
 
 
         updataselections(2,100,0.01,206,"tanh");
+        document.getElementById('exampleCheck1').checked=true;
 
     }
     
@@ -52,6 +54,7 @@ function datagenerate(x){
         }
     
         updataselections(1,3,0.1,20,"relu");
+        document.getElementById('exampleCheck1').checked=true
     }
     
     if(x=="none"){
@@ -65,11 +68,12 @@ function datagenerate(x){
         for (var i = 0; i < 50; i++) {
             data.push({
                 x: k,
-                y: (k-0.5 )* (k-0.5) + Math.random()/30
+                y: (k-0.5 )* (k-0.5) + Math.random()/58
             });
             k += 0.02;
         }
         updataselections(1,17,0.1,40,"relu");
+        document.getElementById('exampleCheck1').checked=false
 
 
     }
@@ -117,7 +121,6 @@ function updataselections(h1,h2,h3,h4,h5){
     document.getElementById('hid_nnlr').innerHTML=h3;
     document.getElementById('h14').value=h4;
     document.getElementById('hid_nnep').innerHTML=h4;
-    document.getElementById('epn').innerHTML=h4;
     document.getElementById('h15').value=h5;
     Number_Of_Hidden_Layers=h1;
     Number_Of_Nodes_Per_Layer=h2;
@@ -128,35 +131,19 @@ function updataselections(h1,h2,h3,h4,h5){
 
 
 function Scaler(){
-    let xmax=-99999;
-    let ymax=-99999;
-    let xmin=99999;
-    let ymin=99999;
-
-    for(let i = 0 ; i < data.length ; i++ ){
-        if(data[i].x<xmin){
-            xmin=data[i].x;
-        }
-
-        if(data[i].y<ymin){
-            ymin=data[i].y;
-        }
-
-        if(data[i].x>xmax){
-            xmax=data[i].x;
-        }
-
-        if(data[i].y>ymax){
-            ymax=data[i].y;
-        }
-
+    let xmax=-99999, ymax=-99999, xmin=99999, ymin=99999;
+    for(let i = 0 ; i < data.length ; i++ )
+    {
+        if(data[i].x<xmin){ xmin=data[i].x; }
+        if(data[i].y<ymin){ ymin=data[i].y; }
+        if(data[i].x>xmax){ xmax=data[i].x; }
+        if(data[i].y>ymax){ ymax=data[i].y; }
     }
 
-    for(let i = 0 ; i < data.length ; i++ ){
+    for(let i = 0 ; i < data.length ; i++ )
+    {
         data[i].x= (data[i].x - xmin)/(xmax-xmin);
         data[i].y= (data[i].y - ymin)/(ymax-ymin);
     }
-
-
 }
 
