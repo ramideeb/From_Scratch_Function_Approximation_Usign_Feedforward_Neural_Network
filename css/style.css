@@ -1,0 +1,15 @@
+.header {
+  text-align: center;
+  background-image: url("../images/bg.jpg");
+  background-color: #013d95;
+  background-position: left;
+  background-size: contain;
+  color: white;
+  background-repeat: no-repeat;
+}
+
+.chartjs-render-monitor {
+  display: block;
+  height: 563px;
+  width: 50rem;
+}

@@ -2,57 +2,47 @@
 <html lang="en">
 
 <head>
-	<title>Simple Neural Networks</title>
-	<script src="Main.js"></script>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-	<script src="lib/matrix.js"></script>
-	<script src="lib/MLNN.js"></script>
+	<title> Universal Function Approximation </title>
+
+	<link rel="stylesheet" href="Libraries/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+
+
+	<script src="Libraries/chartjs.js"></script>
+	<script src="Libraries/matrices.js"></script>
+
+	<script src="NeuralNetwork/Activation_Functions.js"></script>
+	<script src="NeuralNetwork/MLNN.js"></script>
+
+
 </head>
 
 <body>
-	<div class="container-fluid p-4 mb-5" style="
-	text-align: center; background-image: url('images/bg.jpg');
-	background-color: #013d95;
-	background-position:left;
-	background-size: contain;
-	color: white;
-	background-repeat: no-repeat;">
+	<div class="container-fluid p-4 mb-5 header">
 		<h1>Universal Function Approximation </h1>
 		<p>Build your Neural Network Model To Approximate Any Continuous Function</p>
 	</div>
 
 	<div class="container-fluid">
-		<div class="row" style="min-height:25rem;">
+		<div class="row">
 			<div class="col-6-lg" style="text-align: center;">
-				<div class="chartjs-size-monitor">
-					<div class="chartjs-size-monitor-expand">
-						<div class=""></div>
-					</div>
-					<div class="chartjs-size-monitor-shrink">
-						<div class=""></div>
-					</div>
+				<canvas id="canvas" class="chartjs-render-monitor mb-3"></canvas>
+
+				<div class="mb-3">
+					<button class="btn btn-success" onclick="startWorker()">Start Training</button>
+					<button class="btn btn-danger" onclick="stopWorker()">Stop Training</button>
 				</div>
-				<canvas id="canvas" style="display: block; height: 563px; width: 50rem;" width="1408" height="703"
-					class="chartjs-render-monitor"></canvas>
-				<br>
-				<button class="btn btn-success" onclick="startWorker()">Start Training</button>
-				<button class="btn btn-danger" onclick="stopWorker()">Stop Training</button>
-				<br>
-				<br>
-				<br>
-				<span>Epoch:</span>
-				<span id="ennnn">0</span>
-				<span>|</span>
-				<span>MSE :</span>
-				<span id="MSE">0.0</span>
+
+				<span>Epoch:<span id="ennnn">0</span> </span>
+				<span>| MSE :<span id="MSE">0.0</span> </span>
 			</div>
+
+
 			<div class="col">
 				<span>Generate Some Data :</span>
-				<br>
-				<br>
-				<select id="data" class="custom-select" onchange="datagenerate(this.value)">
+
+				<select id="data" class="custom-select mt-3 mb-3" onchange="datagenerate(this.value)">
 					<option value="none" selected>None</option>
 					<option value="sin">sin(x)</option>
 					<option value="cos">cos(x)</option>
@@ -61,135 +51,63 @@
 					<option value="abs">abs(x)</option>
 					<option value="sqrt">sqrt(x)</option>
 				</select>
-				<br>
-				<br>
-				<div class="custom-file">
+
+				<div class="custom-file mb-4">
 					<input type="file" class="custom-file-input" id="customFile">
 					<label class="custom-file-label" for="customFile"> OR UPLOAD YOUR JSON DATA </label>
 				</div>
-				<br>
-				<br><br>
+
 				<div class="form-group">
 					<label for="formControlRange">Number Of Hidden Layers</label>
-					<input on onchange="
-										document.getElementById('hid_n').innerHTML=this.value;
-										Number_Of_Hidden_Layers= Number(this.value);
-
-				" type="range" class="custom-range" id="h11" min="1" max="20" value="1">
+					<input type="range" class="custom-range" id="h11" min="1" max="20" value="1"
+					onchange=" document.getElementById('hid_n').innerHTML=this.value;Number_Of_Hidden_Layers= Number(this.value);">
 					<p id="hid_n">1</p>
 				</div>
 
 				<div class="form-group">
 					<label for="formControlRange">Number Of Nodes Per Layer</label>
-					<input onchange="
-				
-				document.getElementById('hid_nn').innerHTML=this.value;
-				Number_Of_Nodes_Per_Layer=Number(this.value);
-				" type="range" class="custom-range" id="h12" min="1" max="300" value="1">
+					<input type="range" class="custom-range" id="h12" min="1" max="300" value="1"
+						onchange="document.getElementById('hid_nn').innerHTML=this.value;Number_Of_Nodes_Per_Layer=Number(this.value);">
 					<p id="hid_nn">1</p>
 				</div>
 
-
-
 				<span class="form-group">
 					<label for="formControlRange">Learning Rate</label>
-					<input onchange="
-				Learning_Rate=Number(this.value)
-				document.getElementById('hid_nnlr').innerHTML=this.value;
-				" type="range" class="custom-range" id="h13" min="0.0001" max="1" step="0.0001" value="0.01">
+					<input type="range" class="custom-range" id="h13" min="0.0001" max="1" step="0.0001" value="0.01"
+						onchange=" Learning_Rate=Number(this.value);document.getElementById('hid_nnlr').innerHTML=this.value;">
 					<p id="hid_nnlr">0.01</p>
-
 				</span>
-				<br>
-				<span class="form-check">
+
+				<span class="form-check mb-3 mt-3">
 					<input type="checkbox" class="form-check-input" id="exampleCheck1">
 					<label class="form-check-label" for="exampleCheck1">Adaptive Learning Rate</label>
 				</span>
-				<br>
 
 
 				<div class="form-group">
 					<label for="formControlRange">Epochs</label>
-					<input onchange="Epochs=Number(this.value)
-					document.getElementById('hid_nnep').innerHTML=this.value;
-					document.getElementById('epn').innerHTML=this.value" type="range" class="custom-range" id="h14" min="1" max="1000"
-						step="1" value="50">
+					<input type="range" class="custom-range" id="h14" min="1" max="1000" step="1" value="50"
+						onchange="Epochs=Number(this.value);document.getElementById('hid_nnep').innerHTML=this.value;">
 					<p id="hid_nnep">50</p>
 				</div>
 
 				<p>Activation Function</p>
-				<select class="custom-select" id="h15" onchange="Activation_Function=this.value">
+				<select class="custom-select mb-5" id="h15" onchange="Activation_Function=this.value">
 					<option value="sigmoid">sigmoid</option>
 					<option value="tanh" selected>tanh</option>
 					<option value="relu">relu</option>
+					<option value="lrelu">lrelu</option>
+					<option value="lrelu">identity</option>
 				</select>
-				<br><br><br><br><br><br>
 			</div>
 		</div>
 	</div>
 
-	<script>
-		var color = Chart.helpers.color;
-		var scatterChartData = {
-			datasets: [{
-				label: 'training data',
-				borderColor: 'rgb(220,53,69)',
-				backgroundColor: 'rgb(220,53,69)',
-				data: []
-			}, {
 
-				label: 'testing data',
-				borderColor: ('rgb(40, 167, 69'),
-				backgroundColor: 'rgb(40, 167, 69',
-				data: [],
-				type: 'line'
-			}]
-		};
 
-		window.onload = function () {
-			var ctx = document.getElementById('canvas').getContext('2d');
-			window.myScatter = Chart.Scatter(ctx, {
-				data: scatterChartData,
-				options: {
-					responsive: true,
-				}
-			});
-		};
-		var w;
-		function startWorker() {
-			document.getElementById('ennnn').innerHTML = 0;
-			if (typeof (Worker) !== "undefined") {
-				if (typeof (w) == "undefined") {
-					w = new Worker("Training_Thread.js");
-				}
-				w.postMessage(
-					{
-						d: data,
-						NOHL: Number_Of_Hidden_Layers,
-						NONPL: Number_Of_Nodes_Per_Layer,
-						LR: Learning_Rate,
-						E: Epochs,
-						AF: Activation_Function,
-						ALR:document.getElementById('exampleCheck1').checked 
-					});
-				w.onmessage = function (event) {
-					window.scatterChartData.datasets[0].data = event.data.d;
-					window.scatterChartData.datasets[1].data = event.data.p;
-					window.myScatter.update(500)
-					document.getElementById('ennnn').innerHTML = Number(document.getElementById('ennnn').innerHTML) + 1;
-					document.getElementById('MSE').innerHTML = event.data.e;
-					console.log(event.data);
-				};
-			} else {
-				document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
-			}
-		}
 
-		function stopWorker() {
-			w.terminate();
-			w = undefined;
-		}
-	</script>
+
+	<script type="text/javascript" src="JS/Main.js"></script>
 </body>
 
 </html>
