@@ -7,17 +7,12 @@
 	<link rel="stylesheet" href="Libraries/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 
-
-
 	<script src="Libraries/chartjs.js"></script>
 	<script src="Libraries/matrices.js"></script>
 
 	<script src="NeuralNetwork/Activation_Functions.js"></script>
 	<script src="NeuralNetwork/MLNN.js"></script>
-
-
 </head>
-
 <body>
 	<div class="container-fluid p-4 mb-5 header">
 		<h1>Universal Function Approximation </h1>
@@ -36,6 +31,26 @@
 
 				<span>Epoch:<span id="ennnn">0</span> </span>
 				<span>| MSE :<span id="MSE">0.0</span> </span>
+
+					<div class="mt-5">
+
+						<input type="number" name="" id="pnnn">
+						<button class="btn btn-success" onclick="
+						qwe=nncloned.predict([
+							
+						(document.getElementById('pnnn').value - xmin)/(xmax-xmin)
+					
+					]);
+						
+						document.getElementById('pppp').innerHTML=  qwe *(ymax-ymin) +ymin  
+						
+						
+						">Predect</button>
+					<br><br>
+						<span id="pppp"> 0.0</span> 
+
+						
+					</div>
 			</div>
 
 

@@ -2,7 +2,7 @@ self.importScripts("../NeuralNetwork/MLNN.js");
 self.importScripts("../NeuralNetwork/Activation_Functions.js");
 self.importScripts("../Libraries/matrices.js");
 
-let NN;
+var NN=null;
 let epochs;
 let ALR;
 
@@ -48,6 +48,8 @@ function timedCount() {
     p: predections,
     e: error,
     l: NN.getLearningRate(),
+    n:JSON.parse(JSON.stringify(NN)),
+    sp:null
   };
 
   postMessage(m);
@@ -57,15 +59,23 @@ function timedCount() {
 self.addEventListener(
   "message",
   function (e) {
-    data = e.data.d;
-    NN = new NeuralNetwork(1, e.data.NOHL, e.data.NONPL, 1);
-    ALR = e.data.ALR;
 
-    NN.setLearningRate(e.data.LR);
+      if(NN==null)
+      {
+      NN = new NeuralNetwork(1, e.data.NOHL, e.data.NONPL, 1);
+      data = e.data.d;
+      ALR = e.data.ALR;
+      NN.setLearningRate(e.data.LR);
+      NN.setActivation(e.data.AF);
+  
+      }
+
+
+
     epochs = e.data.E;
-    NN.setActivation(e.data.AF);
-
     timedCount();
+
+
   },
   false
 );
