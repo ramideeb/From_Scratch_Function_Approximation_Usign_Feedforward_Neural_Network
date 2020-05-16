@@ -77,27 +77,27 @@ function stopWorker() {
 function datagenerate(x) {
   if (x == "sin") {
     data = [];
-    var k = -10;
-    for (var i = 0; i < 100; i++) {
+    var k = 0;
+    for (var i = 0; i < 21; i++) {
       data.push({
         x: k,
-        y: Math.sin(0.4*k)+Math.random()/8
+        y: Math.sin(7*k)
       });
-      k += 0.2  ;
+      k += 0.05  ;
     }
-    updataselections(2, 70, 0.01, 50, "tanh");
-    document.getElementById("exampleCheck1").checked = true;
+    updataselections(2, 6, 0.01, 4000, "tanh");
+    document.getElementById("exampleCheck1").checked = false;
   }
 
   if (x == "cos") {
     data = [];
-    var k = -10;
-    for (var i = 0; i < 100; i++) {
+    var k = 0;
+    for (var i = 0; i < 21; i++) {
       data.push({
         x: k,
-        y: Math.cos(0.2* k) +Math.random()/8 ,
+        y: Math.cos(9*k) 
       });
-      k += 0.2;
+      k += 0.05;
     }
 
     updataselections(2, 100, 0.01, 206, "tanh");
@@ -106,13 +106,13 @@ function datagenerate(x) {
 
   if (x == "x") {
     data = [];
-    var k = -10;
-    for (var i = 0; i < 100; i++) {
+    var k =0;
+    for (var i = 0; i < 21; i++) {
       data.push({
         x: k,
-        y: k +Math.random()
+        y: k +Math.random()/7
       });
-      k += 0.2;
+      k += 0.05 ;
     }
     
     console.log(JSON.stringify(data ))
@@ -127,44 +127,44 @@ function datagenerate(x) {
 
   if (x == "x^2") {
     data = [];
-    var k = -10;
-    for (var i = 0; i < 100; i++) {
+    var k = 0;
+    for (var i = 0; i < 21; i++) {
       data.push({
         x: k,
-        y: k *k, 
+        y: Math.pow(k-0.5,2)+Math.random()/30, 
       });
-      k += 0.2;
+      k += 0.05;
     }
-    updataselections(1, 17, 0.1, 40, "relu");
+    updataselections(1, 3, 0.1, 5000, "tanh");
     document.getElementById("exampleCheck1").checked = false;
   }
 
   if (x == "abs") {
     data = [];
-    var k = -10;
-    for (var i = 0; i < 100; i++) {
+    var k = 0;
+    for (var i = 0; i < 21; i++) {
       data.push({
         x: k,
-        y: Math.abs(k)
+        y: Math.abs(k-0.5)
       });
-      k += 0.2;
+      k += 0.05;
     }
-    updataselections(1, 30, 0.1, 40, "relu");
+    updataselections(1, 3, 0.1, 4000, "relu");
   }
 
   if (x == "sqrt") {
     data = [];
-    var k = -10;
-    for (var i = 0; i < 100; i++) {
+    var k = 0;
+    for (var i = 0; i < 21; i++) {
       data.push({
         x: k,
-        y: Math.sqrt(k+10)
+        y: Math.sqrt(k)
       });
-      k += 0.2;
+      k += 0.05;
     }
     updataselections(1, 30, 0.1, 40, "sigmoid");
   }
-  Scaler();
+ // Scaler();
   window.scatterChartData.datasets[0].data = data;
   window.myScatter.update(500);
 }

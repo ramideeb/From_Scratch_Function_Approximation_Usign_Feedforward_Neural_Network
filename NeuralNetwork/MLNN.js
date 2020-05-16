@@ -79,6 +79,7 @@ class NeuralNetwork {
       );
       gradients_array.multiply(error);
       gradients_array.multiply(this.learning_rate);
+    
       if (i < this.hidden_layers + 1 && i > 0) {
         if (bool == 1) {
           gradients_array.add(prev.multiply(0.9));

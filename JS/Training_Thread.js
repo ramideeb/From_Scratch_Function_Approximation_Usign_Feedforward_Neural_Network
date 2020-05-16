@@ -22,7 +22,7 @@ function getPredections() {
 function fit() {
   var error = 0;
   for (let i = 0; i < data.length; i++) {
-    let x = Math.floor(Math.random() * data.length);
+    let x = Math.floor( Math.random() * data.length );
     error += NN.train([data[x].x], [data[x].y]);
   }
   epochs -= 1;
