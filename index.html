@@ -17,13 +17,19 @@
 	<div class="container-fluid p-4 mb-5 header">
 		<h1>Universal Function Approximation </h1>
 		<p>Build your Neural Network Model To Approximate Any Continuous Function</p>
+		
 	</div>
 
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-6-lg" style="text-align: center;">
-				<canvas id="canvas" class="chartjs-render-monitor mb-3"></canvas>
 
+		<div class="row">
+		
+			<div class="col-6-lg" style="text-align: center;">
+				
+				<canvas id="canvas" class="chartjs-render-monitor mb-3"></canvas>
+				<br>
+				<h6>To accelerate the learning process keep pressing on start training to create new learning thread </h6>
+				<br>
 				<div class="mb-3">
 					<button class="btn btn-success" onclick="startWorker()">Start Training</button>
 					<button class="btn btn-danger" onclick="stopWorker()">Stop Training</button>
@@ -32,9 +38,11 @@
 				<span>Epoch:<span id="ennnn">0</span> </span>
 				<span>| MSE :<span id="MSE">0.0</span> </span>
 
+				<!--
 					<div class="mt-5">
 
 						<input type="number" name="" id="pnnn">
+
 						<button class="btn btn-success" onclick="
 						qwe=nncloned.predict([
 							
@@ -51,6 +59,7 @@
 
 						
 					</div>
+-->
 			</div>
 
 
