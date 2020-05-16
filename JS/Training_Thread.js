@@ -30,15 +30,17 @@ function fit() {
 }
 
 let preverr = 0;
+let i = 0;
 function timedCount() {
   let error = fit();
-
-  if (ALR) {
+  i=i+1;
+  if (ALR && i%100==0) {
     if (preverr > error) {
       NN.setLearningRate(NN.getLearningRate() * 1.1);
     } else {
-      NN.setLearningRate(NN.getLearningRate() * 0.95);
+      NN.setLearningRate(NN.getLearningRate() * 0.75);
     }
+
   }
 
   getPredections();

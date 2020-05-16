@@ -100,8 +100,8 @@ function datagenerate(x) {
       k += 0.05;
     }
 
-    updataselections(2, 100, 0.01, 206, "tanh");
-    document.getElementById("exampleCheck1").checked = true;
+    updataselections(3, 50, 0.01, 1000, "tanh");
+    document.getElementById("exampleCheck1").checked = false;
   }
 
   if (x == "x") {
