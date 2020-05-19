@@ -7,6 +7,7 @@ let epochs;
 let ALR;
 
 var predections = [];
+
 function getPredections() {
   predections = [];
   k = 0;
@@ -28,6 +29,8 @@ function fit() {
   epochs -= 1;
   return error / data.length;
 }
+
+
 
 let preverr = 0;
 let i = 0;
@@ -55,28 +58,33 @@ function timedCount() {
   };
 
   postMessage(m);
-  if (epochs > 0) setTimeout("timedCount()", 500);
+
+  if (epochs > 0 ) setTimeout("timedCount()", 500);
 }
+
+
+
 
 self.addEventListener(
   "message",
   function (e) {
 
       if(NN==null)
-      {
+      { 
       NN = new NeuralNetwork(1, e.data.NOHL, e.data.NONPL, 1);
       data = e.data.d;
       ALR = e.data.ALR;
       NN.setLearningRate(e.data.LR);
       NN.setActivation(e.data.AF);
+      epochs = e.data.E;
+
   
+      }else
+      {
+        epochs = e.data.E
       }
 
-
-
-    epochs = e.data.E;
     timedCount();
-
 
   },
   false

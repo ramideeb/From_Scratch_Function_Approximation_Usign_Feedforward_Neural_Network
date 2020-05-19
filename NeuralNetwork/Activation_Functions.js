@@ -16,13 +16,13 @@ var tanh = new Activation(
 );
 
 var relu = new Activation(
-  (x) => (x > 0 ? x : 0),
-  (y) => (y <= 0 ? 0 : 1)
+  (x) => Math.max(0,x),
+  (y) => (y > 0 ? 1 : 0)
 );
 
 var lrelu = new Activation(
-  (x) => (x > 0 ? x : 0.01 * x),
-  (y) => (y <= 0 ? 0.01 : 1)
+  (x) => (x >= 0 ? x : 0.01 * x),
+  (y) => (y >= 0 ? 1 : 0.01)
 );
 
 var identity = new Activation(
