@@ -45,7 +45,7 @@ class Matrix {
     return t;
   }
   randomize() {
-    return this.map((t) => 2 * Math.random() - 1);
+    return this.map((t) => (2 * Math.random() - 1));
   }
   add(t) {
     return t instanceof Matrix

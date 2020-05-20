@@ -76,13 +76,9 @@ self.addEventListener(
       ALR = e.data.ALR;
       NN.setLearningRate(e.data.LR);
       NN.setActivation(e.data.AF);
-      epochs = e.data.E;
-
-  
-      }else
-      {
-        epochs = e.data.E
       }
+      
+      epochs = e.data.E;
 
     timedCount();
 

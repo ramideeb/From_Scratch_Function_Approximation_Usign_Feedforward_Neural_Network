@@ -43,8 +43,10 @@ function startWorker() {
   document.getElementById("ennnn").innerHTML = 0;
   if (typeof Worker !== "undefined") {
     if (typeof w == "undefined") {
-      w = new Worker("JS/Training_Thread.js");
+      w = new Worker("JS/Training_Thread.js");  
     }
+
+
     w.postMessage({
       d: data,
       NOHL: Number_Of_Hidden_Layers,
@@ -55,17 +57,16 @@ function startWorker() {
       ALR: document.getElementById("exampleCheck1").checked,
     });
 
-    let descaled1;
-    let descaled2;
+
 
     w.onmessage = function (event) {
       window.scatterChartData.datasets[0].data = deScaler(event.data.d);
       window.scatterChartData.datasets[1].data = deScaler(event.data.p);
       window.myScatter.update(500);
       document.getElementById("ennnn").innerHTML =
-        Number(document.getElementById("ennnn").innerHTML) + 1;
+      Number(document.getElementById("ennnn").innerHTML) + 1;
       document.getElementById("MSE").innerHTML = event.data.e;
-      //    console.log(event.data);
+      //console.log(event.data);
       nncloned = new NeuralNetwork(1, 1, 1, 1);
       nncloned.clone(event.data.n);
     };
@@ -77,6 +78,7 @@ function startWorker() {
 
 function stopWorker() {
   w.terminate();
+  
   w = undefined;
 }
 
@@ -88,7 +90,7 @@ function datagenerate(x) {
     for (var i = 0; i < 41; i++) {
       data.push({
         x: k,
-        y: Math.sin(0.4* k),
+        y: Math.sin(0.4* k)+Math.random()/5,
       });
       k += 0.5;
     }
@@ -103,7 +105,7 @@ function datagenerate(x) {
     for (var i = 0; i < 41; i++) {
       data.push({
         x: k,
-        y: Math.cos(0.4*k+1),
+        y: Math.cos(0.4*k+1)+Math.random()/5,
       });
       k += 0.5;
     }
@@ -118,7 +120,7 @@ function datagenerate(x) {
     for (var i = 0; i < 21; i++) {
       data.push({
         x: k,
-        y: k + Math.random() / 7,
+        y: k + Math.random() ,
       });
       k += 1;
     }
@@ -140,7 +142,7 @@ function datagenerate(x) {
     for (var i = 0; i < 41; i++) {
       data.push({
         x: k,
-        y: Math.pow(k, 2),
+        y: Math.pow(k, 2) + 9*Math.random(),
       });
       k += 0.5;
     }
@@ -155,7 +157,7 @@ function datagenerate(x) {
     for (var i = 0; i < 41; i++) {
       data.push({
         x: k,
-        y: Math.abs(k),
+        y: Math.abs(k)+Math.random(),
       });
       k += 0.5;
     }
@@ -177,7 +179,6 @@ function datagenerate(x) {
   window.scatterChartData.datasets[0].data = data;
   window.myScatter.update(500);
   Scaler();
-
 
 }
 
@@ -223,10 +224,12 @@ function Scaler() {
     data[i].x = (data[i].x - xmin) / (xmax - xmin);
     data[i].y = (data[i].y - ymin) / (ymax - ymin);
   }
+
 }
 
 
 function deScaler(data) {
+
   let deScaled = data;
   for (let i = 0; i < data.length; i++) {
     deScaled[i].x = data[i].x * (xmax - xmin) + xmin;
@@ -236,3 +239,10 @@ function deScaler(data) {
 
 }
 
+
+function readpoints(){
+ data= JSON.parse(document.getElementById('pointsTA').value );
+ window.scatterChartData.datasets[0].data = data;
+ window.myScatter.update(500);
+ Scaler();
+}

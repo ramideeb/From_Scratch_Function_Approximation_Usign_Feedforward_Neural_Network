@@ -38,18 +38,13 @@
 				<span>Epoch:<span id="ennnn">0</span> </span>
 				<span>| MSE :<span id="MSE">0.0</span> </span>
 
-				<!--
+				
 					<div class="mt-5">
 
 						<input type="number" name="" id="pnnn">
 
 						<button class="btn btn-success" onclick="
-						qwe=nncloned.predict([
-							
-						(document.getElementById('pnnn').value - xmin)/(xmax-xmin)
-					
-					]);
-						
+						qwe=nncloned.predict([(document.getElementById('pnnn').value - xmin)/(xmax-xmin) ]);	
 						document.getElementById('pppp').innerHTML=  qwe *(ymax-ymin) +ymin  
 						
 						
@@ -59,7 +54,7 @@
 
 						
 					</div>
--->
+
 			</div>
 
 
@@ -77,8 +72,21 @@
 				</select>
 
 				<div class="custom-file mb-4">
-					<input type="file" class="custom-file-input" id="customFile">
-					<label class="custom-file-label" for="customFile"> OR UPLOAD YOUR JSON DATA </label>
+					
+				OR INPUT YOUR JSON POINTS 
+				<br>
+				<br>
+					<textarea name="" id="pointsTA" cols="90" placeholder="OR enter your Json points" rows="5" >
+[
+{"x":1,"y":1},
+{"x":2,"y":2},
+{"x":3,"y":3},
+{"x":4,"y":4}
+]</textarea>
+<br> 
+					<button class="btn btn-success" onclick="readpoints()">Read Points</button>
+					<br>
+					<br>
 				</div>
 
 				<div class="form-group">

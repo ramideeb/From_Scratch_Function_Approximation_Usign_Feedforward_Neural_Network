@@ -6,24 +6,33 @@ class NeuralNetwork {
     this.output_nodes = out_nodes;
     this.weights = [];
     this.weights.push(new Matrix(this.hidden_nodes, this.input_nodes));
+    
     for (let i = 0; i < hlayers - 1; i++) {
       let m = new Matrix(this.hidden_nodes, this.hidden_nodes);
       this.weights.push(m);
     }
+    
     this.weights.push(new Matrix(this.output_nodes, this.hidden_nodes));
+    
     for (let i = 0; i < this.weights.length; i++) {
       this.weights[i].randomize();
     }
+    
     this.biases = [];
+    
     for (let i = 0; i < hlayers; i++) {
       this.biases.push(new Matrix(this.hidden_nodes, 1));
     }
+    
     this.biases.push(new Matrix(this.output_nodes, 1));
+    
     for (let i = 0; i < this.biases.length; i++) {
       this.biases[i].randomize();
     }
+    
     this.setLearningRate();
     this.setActivation();
+
   }
 
   clone(obj) {
@@ -42,6 +51,7 @@ class NeuralNetwork {
     }
     this.setActivation(obj.func);
   }
+
 
   predict(input_list) {
     let inputs = Matrix.fromArray(input_list);
@@ -103,9 +113,10 @@ class NeuralNetwork {
         }
         bool = 1;
       }
+
       prev = gradients_array;
 
-      let hidden_t = Matrix.transpose(Layers[i - 1]);
+      let hidden_t = Matrix.transpose(Layers[i - 1]); 
       let deltas = Matrix.multiply(gradients_array, hidden_t);
 
       this.weights[i - 1].add(deltas);
@@ -129,7 +140,7 @@ class NeuralNetwork {
     if (func == "tanh") {
       this.activation_function = tanh;
     } else if (func == "relu") {
-      this.activation_function = relu;
+      this.activation_function = relu;             
     } else if (func == "sigmoid") {
       this.activation_function = sigmoid;
     } else if (func == "lrelu") {
